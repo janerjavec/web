@@ -20,12 +20,20 @@ namespace web.Controllers
         }
 
         // GET: Guest
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             ViewData["SurnameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "surname_desc" : "";
             ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["CurrentFilter"] = searchString;
+
             var guests = from s in _context.Guest
                         select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                guests = guests.Where(s => s.Surname.Contains(searchString)
+                                    || s.Name.Contains(searchString));
+            }
             switch (sortOrder)
             {
                 case "surname_desc":
