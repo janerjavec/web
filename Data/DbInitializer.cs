@@ -20,7 +20,18 @@ namespace web.Data
 
             var guests = new Guest[]
             {
-                new Guest{Name="Carson",Surname="Alexander", Address="Dunajska 1",Age=20,PhoneNumber=040999999, Email="alexandercarson@gmail.com"}
+                new Guest{Name="Janez", Surname="Novak", Address="Dunajska 1", Age=20, PhoneNumber=040999999, Email="janeznovak@gmail.com"},
+                new Guest{Name="Ana", Surname="Kovač", Address="Prešernova 5", Age=25, PhoneNumber=041111111, Email="anakovac@gmail.com"},
+                new Guest{Name="Matej", Surname="Horvat", Address="Trubarjeva 12", Age=30, PhoneNumber=041234567, Email="matejhorvat@gmail.com"},
+                new Guest{Name="Maja", Surname="Bizjak", Address="Cankarjeva 8", Age=22, PhoneNumber=040876543, Email="majabizjak@gmail.com"},
+                new Guest{Name="Luka", Surname="Krajnc", Address="Miklošičeva 3", Age=28, PhoneNumber=041234567, Email="lukakrajnc@gmail.com"},
+                new Guest{Name="Tina", Surname="Zupan", Address="Strojarska 7", Age=26, PhoneNumber=040987654, Email="tinazupan@gmail.com"},
+                new Guest{Name="Marko", Surname="Oblak", Address="Gosposvetska 15", Age=24, PhoneNumber=041111111, Email="markooblak@gmail.com"},
+                new Guest{Name="Nina", Surname="Hribar", Address="Šmartinska 10", Age=27, PhoneNumber=040876543, Email="ninahribar@gmail.com"},
+                new Guest{Name="Miha", Surname="Petrovič", Address="Slovenska 2", Age=23, PhoneNumber=041234567, Email="mihapetrovic@gmail.com"},
+                new Guest{Name="Eva", Surname="Kos", Address="Linhartova 6", Age=29, PhoneNumber=040987654, Email="evakos@gmail.com"},
+                new Guest{Name="Boris", Surname="Kotnik", Address="Vodnikova 9", Age=31, PhoneNumber=041111111, Email="boriskotnik@gmail.com"}
+
             };
             
             foreach (Guest g in guests){

@@ -20,9 +20,28 @@ namespace web.Controllers
         }
 
         // GET: Guest
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            return View(await _context.Guest.ToListAsync());
+            ViewData["SurnameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "surname_desc" : "";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            var guests = from s in _context.Guest
+                        select s;
+            switch (sortOrder)
+            {
+                case "surname_desc":
+                    guests = guests.OrderByDescending(s => s.Surname);
+                    break;
+                case "name":
+                    guests = guests.OrderBy(s => s.Name);
+                    break;
+                case "name_desc":
+                    guests = guests.OrderByDescending(s => s.Name);
+                    break;
+                default:
+                    guests = guests.OrderBy(s => s.Surname);
+                    break;
+            }
+            return View(await guests.AsNoTracking().ToListAsync());
         }
 
         // GET: Guest/Details/5
