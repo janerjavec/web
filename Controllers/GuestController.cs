@@ -20,14 +20,25 @@ namespace web.Controllers
         }
 
         // GET: Guest
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["SurnameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "surname_desc" : "";
             ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
             ViewData["CurrentFilter"] = searchString;
 
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
             var guests = from s in _context.Guest
                         select s;
+
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -49,7 +60,8 @@ namespace web.Controllers
                     guests = guests.OrderBy(s => s.Surname);
                     break;
             }
-            return View(await guests.AsNoTracking().ToListAsync());
+            int pageSize = 3;
+            return View(await PaginatedList<Guest>.CreateAsync(guests.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Guest/Details/5
