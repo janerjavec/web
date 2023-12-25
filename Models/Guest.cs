@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace web.Models
 {
@@ -9,7 +10,15 @@ namespace web.Models
         //[Key]
         public int Id { get; set; }
 
+        [Required]
+        [StringLength(50)]
+        [Column("FirstName")] // na bazi bo atribut FirstName
+        [Display(Name = "Name")]
         public string Name { get; set; }
+        [Required]
+        [StringLength(50)]
+        [Column("LastName")]
+        [Display(Name = "Surname")]
         public string Surname { get; set; }
         public string Address { get; set; }
         public int Age { get; set; }
