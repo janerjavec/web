@@ -43,7 +43,8 @@ namespace web.Data
             /*
             var reservation = new Reservation[]
             {
-                new Reservation{Id=1,Guest_Id=1,Room_Id=1, StartDate=DateTime.Parse("2024-02-01"),EndDate=DateTime.Parse("2024-02-05"),TotalPrice=200}
+                new Reservation{Guest_Id=1,Room_Id=1, StartDate=DateTime.Parse("2024-02-01"),EndDate=DateTime.Parse("2024-02-05"),TotalPrice=200,Owner = context.Users.FirstOrDefault()},
+                new Reservation{Guest_Id=2,Room_Id=1, StartDate=DateTime.Parse("2024-05-01"),EndDate=DateTime.Parse("2024-05-05"),TotalPrice=1200,Owner = context.Users.FirstOrDefault()}
             };
 
             context.Reservation.AddRange(reservation);

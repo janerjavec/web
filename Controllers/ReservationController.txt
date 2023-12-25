@@ -7,22 +7,33 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using web.Data;
 using web.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Diagnostics.Metrics;
 
 namespace web.Controllers
 {
+    //[Authorize]
     public class ReservationController : Controller
     {
         private readonly HotelContext _context;
+        private readonly UserManager<ApplicationUser> _usermanager;
 
-        public ReservationController(HotelContext context)
+        public ReservationController(HotelContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _usermanager = userManager;
         }
 
         // GET: Reservation
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Reservation.ToListAsync());
+            var reservations = _context.Reservation
+                .Include(r => r.Guest)  // Include the foreign key
+                //.ThenInclude(g => g.Guest)  // Then include the related entity
+                .AsNoTracking();
+            return View(await reservations.ToListAsync());
+            //return View(await _context.Reservation.ToListAsync());
         }
 
         // GET: Reservation/Details/5
@@ -56,8 +67,10 @@ namespace web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Guest_Id,Room_Id,StartDate,EndDate,TotalPrice")] Reservation reservation)
         {
+            var currentUser = await _usermanager.GetUserAsync(User);
             if (ModelState.IsValid)
             {
+                reservation.Owner = currentUser;
                 _context.Add(reservation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -66,6 +79,7 @@ namespace web.Controllers
         }
 
         // GET: Reservation/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -117,6 +131,7 @@ namespace web.Controllers
         }
 
         // GET: Reservation/Delete/5
+        [Authorize(Roles = "Administrator, Staff")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
