@@ -22,6 +22,11 @@ namespace web.Data
             modelBuilder.Entity<Guest>().ToTable("Guest");
             modelBuilder.Entity<Hotel>().ToTable("Hotel");
             modelBuilder.Entity<Reservation>().ToTable("Reservation");
+            modelBuilder.Entity<Reservation>()
+                .HasOne(r => r.Guest)
+                .WithMany()
+                .HasForeignKey(r => r.Guest_Id)
+                .HasPrincipalKey(g => g.Id);
             modelBuilder.Entity<Room>().ToTable("Room");
         }
     }

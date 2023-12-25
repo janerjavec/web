@@ -13,7 +13,7 @@ using System.Diagnostics.Metrics;
 
 namespace web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ReservationController : Controller
     {
         private readonly HotelContext _context;
@@ -28,7 +28,12 @@ namespace web.Controllers
         // GET: Reservation
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Reservation.ToListAsync());
+            var reservations = _context.Reservation
+                .Include(r => r.Guest)  // Include the foreign key
+                //.ThenInclude(g => g.Guest)  // Then include the related entity
+                .AsNoTracking();
+            return View(await reservations.ToListAsync());
+            //return View(await _context.Reservation.ToListAsync());
         }
 
         // GET: Reservation/Details/5
