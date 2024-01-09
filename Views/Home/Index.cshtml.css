@@ -43,3 +43,11 @@ h1{
 .min-h-50vh{
     min-height: 50vh;
 }
+
+.mySlides {
+    display: none;
+  }
+
+  .caption {
+    text-align: center;
+  }

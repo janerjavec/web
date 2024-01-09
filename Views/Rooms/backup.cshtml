@@ -1,0 +1,71 @@
+﻿<!DOCTYPE cshtml>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<div class="slideshow-container">
+
+<div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="https://cdn.discordapp.com/attachments/991709979021160488/1194277766653296730/DALLE_2024-01-09_14.52.39_-_A_grand_and_expansive_hotel_room_in_a_wide_format_showcasing_luxury_and_spaciousness._The_room_features_a_large_opulent_king-sized_bed_with_lavish_b.png?ex=65afc4d8&is=659d4fd8&hm=19c74c626d2c0484f0f70cb82f2f3c94a78a240373977d7356e59db4cc8edecb&" style="width:100%">
+  <div class="text">Caption Text</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="https://cdn.discordapp.com/attachments/991709979021160488/1194277765931872328/DALLE_2024-01-09_14.52.42_-_A_luxurious_bathroom_that_matches_the_style_of_the_expansive_hotel_room_previously_depicted_designed_in_a_wide_format._The_bathroom_is_spacious_and_e.png?ex=65afc4d8&is=659d4fd8&hm=c1c28314b3c416abf612bf614202c5543fdc8d46105878dbc0c7b77f4f1158af&" style="width:100%">
+  <div class="text">Caption Two</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="https://cdn.discordapp.com/attachments/991709979021160488/1194277765080424479/DALLE_2024-01-09_14.53.17_-_A_high-end_hotel_suite_kitchen_that_complements_the_style_of_the_previously_depicted_luxurious_hotel_room_and_bathroom_designed_in_a_wide_format._The.png?ex=65afc4d7&is=659d4fd7&hm=f909cde0518245eadd9868ef72101451523a26a3afe90cfc627ba495c4766946&" style="width:100%">
+  <div class="text">Caption Three</div>
+</div>
+
+<a class="prev" onclick="plusSlides(-1)">❮</a>
+<a class="next" onclick="plusSlides(1)">❯</a>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span> 
+  <span class="dot" onclick="currentSlide(2)"></span> 
+  <span class="dot" onclick="currentSlide(3)"></span> 
+</div>
+
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+</script>
+
+</body>
+</html> 

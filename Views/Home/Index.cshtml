@@ -1,4 +1,25 @@
-﻿<div class="bg-img-1">
+﻿<script>
+  var myIndex = 0;
+  carousel();
+
+  function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {
+      myIndex = 1;
+    }    
+    x[myIndex - 1].style.display = "block";  
+    setTimeout(carousel, 2500);
+  }
+</script>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<div class="bg-img-1">
 	<div class="bg-overlay ">
 		<div class="container">
 			<img src="https://cdn.discordapp.com/attachments/991709979021160488/1193945277397205002/logo.png?ex=65ae8f30&is=659c1a30&hm=704a8f1e80ae11dae0a105e786ce0d75a90acbe4d296f3b88bac7d78f8c03a5c&" alt="Hotel Image" style="display: block; margin: auto; width: 20%;">
@@ -42,15 +63,33 @@ Na 15. nadstropju hotela se nahajajo dve manjši sejni sobi, Smaragd in Rubin, t
 </div>
 
 <div class="container min-h-50vh">
-	<h2>SOBE</h2>
+	<h4>SOBE</h4>
 	<h3>Najjace sobe</h3>
 	<p>Ful so dobre sobe</p>
-		<a asp-area="" asp-controller="Rooms" asp-action="Index" class="about-link">
+	<div style="max-width:500px">
+	<div class="mySlides w3-animate-top">
+		<img src="https://cdn.discordapp.com/attachments/991709979021160488/1194274406483112056/DALLE_2024-01-09_14.39.49_-_A_luxurious_hotel_room_interior_in_a_square_format._The_room_is_elegantly_designed_with_a_modern_aesthetic._It_features_a_large_comfortable_king-size.png?ex=65afc1b7&is=659d4cb7&hm=4b73af5959b32d92c1f309b1dddd14a74b16e5102f6d64e70a958005827aef4e&" style="width:100%">
+		<div class="caption">Caption for Image 1</div>
+	</div>
+	<div class="mySlides w3-animate-bottom">
+		<img src="https://cdn.discordapp.com/attachments/991709979021160488/1194274629326475374/DALLE_2024-01-09_14.40.51_-_A_different_style_of_a_luxurious_hotel_room_in_square_format._This_room_has_a_contemporary_minimalist_design_with_clean_lines_and_a_monochromatic_col.png?ex=65afc1ec&is=659d4cec&hm=624d150e70005e371b15f6cf8b2eea2195c30f7cb458431690ebef2d684e8e2e&" style="width:100%">
+		<div class="caption">Caption for Image 2</div>
+	</div>
+	<div class="mySlides w3-animate-top">
+		<img src="https://cdn.discordapp.com/attachments/991709979021160488/1194274810184859649/DALLE_2024-01-09_14.41.34_-_A_spacious_two-bedroom_hotel_suite_in_a_luxurious_style._The_main_bedroom_features_a_large_king-sized_bed_with_elegant_bedding_a_plush_headboard_and.png?ex=65afc217&is=659d4d17&hm=f500a8267908cc3fe9a707da3d80fab2e22d1a522af32fc672242ad81950ac5b&" style="width:100%">
+		<div class="caption">Caption for Image 3</div>
+	</div>
+	<div class="mySlides w3-animate-bottom">
+		<img src="https://cdn.discordapp.com/attachments/991709979021160488/1194274991856943154/DALLE_2024-01-09_14.42.18_-_A_cozy_and_elegantly_designed_junior_suite_in_a_luxury_hotel._The_room_features_a_comfortable_queen-sized_bed_with_high-quality_bedding_and_a_variety_.png?ex=65afc242&is=659d4d42&hm=4e8877b1d17021c0dd3e577ded901cb6260fbcfd16bfca9d706780a0a4877cb6&" style="width:100%">
+		<div class="caption">Caption for Image 4</div>
+	</div>
+	</div>
+			<a asp-area="" asp-controller="Rooms" asp-action="Index" class="about-link">
 			<span>Poglejte vse sobe</span>
 			<i>→</i>
 		</a>
 </div>
-
+</div>
 
 
 <div class="bg-img-3">
@@ -75,3 +114,23 @@ Na 15. nadstropju hotela se nahajajo dve manjši sejni sobi, Smaragd in Rubin, t
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1382.960318817083!2d14.468046338962882!3d46.1124883522013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477accec05b31a3d%3A0xb92858443e8309c3!2sČervanova%20ulica%2010%2C%201000%20Ljubljana!5e0!3m2!1ssl!2ssi!4v1704640966022!5m2!1ssl!2ssi" width=100% height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
+
+
+<script>
+  var myIndex = 0;
+  carousel();
+
+  function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {
+      myIndex = 1;
+    }    
+    x[myIndex - 1].style.display = "block";  
+    setTimeout(carousel, 5000);
+  }
+</script>
