@@ -10,6 +10,31 @@ h1{
     font-size: 60px;
 }
 
+
+
+h2{
+    color: #2C3E58;
+    font-size: 60px;
+    font-family: Serif;
+    font-weight: bold;
+}
+
+h4{
+    color: #A9ACB5;
+}
+
+h5{
+    color: #2C3E58;
+    font-size: 30px;
+    font-family: Serif;
+    font-weight: bold;
+}
+
+p{
+    color: #54647B;
+    font-size: 18px;
+}
+
 .bg-overlay{
     background-color: #00000080;
     min-height: 50vh;
