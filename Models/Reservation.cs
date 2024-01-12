@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using web.Models;
 
 
-namespace web.Models    //komentar
+namespace web.Models
 {
 
     public class FutureDateAttribute : ValidationAttribute
