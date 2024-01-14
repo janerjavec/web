@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using web.Data;
 using web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace web.Controllers
 {
@@ -65,6 +66,7 @@ namespace web.Controllers
         }
 
         // GET: Guest/Details/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -105,6 +107,7 @@ namespace web.Controllers
         }
 
         // GET: Guest/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -156,6 +159,7 @@ namespace web.Controllers
         }
 
         // GET: Guest/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

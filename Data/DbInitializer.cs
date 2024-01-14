@@ -12,6 +12,14 @@ namespace web.Data
         public static void Initialize(HotelContext context)
         {
             context.Database.EnsureCreated();
+            var roles = new IdentityRole[] {
+                new IdentityRole{Id="1", Name="Administrator"}
+            };
+
+            foreach (IdentityRole r in roles)
+            {
+                context.Roles.Add(r);
+            }
 
             if (context.Guest.Any())
             {
@@ -67,7 +75,7 @@ namespace web.Data
 
             context.Room.AddRange(room);
             */
-
+/*
             var roles = new IdentityRole[] {
                 new IdentityRole{Id="1", Name="Administrator"},
                 new IdentityRole{Id="2", Name="Manager"},
@@ -78,38 +86,54 @@ namespace web.Data
             {
                 context.Roles.Add(r);
             }
+*/
+var user = new ApplicationUser
+{
+    FirstName = "Bob",
+    LastName = "Dilon",
+    City = "Ljubljana",
+    Email = "bob@example.com",
+    NormalizedEmail = "XXXX@EXAMPLE.COM",
+    UserName = "bob@example.com",
+    NormalizedUserName = "bob@example.com",
+    PhoneNumber = "+111111111111",
+    EmailConfirmed = true,
+    PhoneNumberConfirmed = true,
+    SecurityStamp = Guid.NewGuid().ToString("D")
+};
 
-            var user = new ApplicationUser
-            {
-                FirstName = "Bob",
-                LastName = "Dilon",
-                City = "Ljubljana",
-                Email = "bob@example.com",
-                NormalizedEmail = "XXXX@EXAMPLE.COM",
-                UserName = "bob@example.com",
-                NormalizedUserName = "bob@example.com",
-                PhoneNumber = "+111111111111",
-                EmailConfirmed = true,
-                PhoneNumberConfirmed = true,
-                SecurityStamp = Guid.NewGuid().ToString("D")
-            };
+if (!context.Users.Any(u => u.UserName == user.UserName))
+{
+    var password = new PasswordHasher<ApplicationUser>();
+    var hashed = password.HashPassword(user, "Testni123!");
+    user.PasswordHash = hashed;
+    context.Users.Add(user);
+    context.SaveChanges(); // Save changes to get the user's Id
 
+    // Retrieve the "Administrator" role from the database
+    var administratorRole = context.Roles.SingleOrDefault(r => r.Name == "Administrator");
 
-            if (!context.Users.Any(u => u.UserName == user.UserName))
-            {
-                var password = new PasswordHasher<ApplicationUser>();
-                var hashed = password.HashPassword(user,"Testni123!");
-                user.PasswordHash = hashed;
-                context.Users.Add(user);
-                
-            }
+    if (administratorRole != null)
+    {
+        // Assign the "Administrator" role to the user
+        var userRole = new IdentityUserRole<string>
+        {
+            RoleId = administratorRole.Id,
+            UserId = user.Id
+        };
+
+        context.UserRoles.Add(userRole);
+        context.SaveChanges();
+    }
+}
+
 
             context.SaveChanges();
             
             var UserRoles = new IdentityUserRole<string>[]
             {
                 new IdentityUserRole<string>{RoleId = roles[0].Id, UserId=user.Id},
-                new IdentityUserRole<string>{RoleId = roles[1].Id, UserId=user.Id},
+                //new IdentityUserRole<string>{RoleId = roles[1].Id, UserId=user.Id},
             };
 
             foreach (IdentityUserRole<string> r in UserRoles)
