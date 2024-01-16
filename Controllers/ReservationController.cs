@@ -25,6 +25,7 @@ namespace web.Controllers
             // Include the Room property when fetching reservations
             var reservations = await _context.Reservation
                 .Include(r => r.Room)
+                .Include(r => r.Guest)
                 .ToListAsync();
 
             return View(reservations);
