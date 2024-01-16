@@ -16,6 +16,7 @@ namespace web.Data
         public DbSet<Reservation> Reservation { get; set; }
         public DbSet<Room> Room { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -32,7 +33,12 @@ namespace web.Data
                 .HasMany(r => r.Reservations)
                 .WithOne(res => res.Room)
                 .HasForeignKey(res => res.Room_Id)
-                .OnDelete(DeleteBehavior.Cascade); // Choose the appropriate delete behavior
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Guest>()
+                .HasMany(g => g.Reservations)
+                .WithOne(r => r.Guest)
+                .HasForeignKey(r => r.Guest_Id)
+                .OnDelete(DeleteBehavior.Cascade);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

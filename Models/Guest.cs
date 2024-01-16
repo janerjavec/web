@@ -25,5 +25,13 @@ namespace web.Models
         public int Age { get; set; }
         public int PhoneNumber { get; set; }
         public string Email { get; set; }
+
+        public virtual ICollection<Reservation> Reservations { get; set; } // Navigation property for reservations
+
+        public Guest()
+        {
+            Reservations = new HashSet<Reservation>();
+        }
+    
     }
 }

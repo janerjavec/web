@@ -31,7 +31,7 @@ namespace web.Models
     {
         public int Id { get; set; }
         public int Guest_Id { get; set; }
-        //public Guest Guest { get; set; }  // Navigation property to the Guest entity
+        public Guest? Guest { get; set; }  // Navigation property to the Guest entity
         public int Room_Id { get; set; }
         public virtual Room? Room { get; set; }
         [DataType(DataType.Date)]
