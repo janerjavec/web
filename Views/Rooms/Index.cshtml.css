@@ -40,7 +40,8 @@ body,
 
 .slide-content span {
   font-size: 5rem;
-  color: #fff;
+  color: #ffffff;
+  text-shadow: black 2px 2px;
 }
 
 .arrow {
@@ -66,3 +67,4 @@ body,
   right: 0;
   margin-right: 30px;
 }
+
