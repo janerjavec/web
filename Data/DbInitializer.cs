@@ -48,7 +48,25 @@ namespace web.Data
             
             //context.Guest.AddRange(guests);
             context.SaveChanges();
-            /*
+
+            var hotels = new Hotel[]
+            {
+                new Hotel { Name = "Hotel JZ", Location = "City A", Rating = 5 }
+            };
+
+            var rooms = new Room[]
+            {
+                new Room { NumberOfBeds = 2, Price = 100.00f, Description = "Standard Room", HotelId = 1 },
+                new Room { NumberOfBeds = 1, Price = 80.00f, Description = "Single Room", HotelId = 1 },
+                new Room { NumberOfBeds = 3, Price = 120.00f, Description = "Suite", HotelId = 1 },
+                // Add more rooms as needed
+            };
+
+            context.Hotel.AddRange(hotels);
+            context.Room.AddRange(rooms);
+            context.SaveChanges();
+
+                       /*
             var reservation = new Reservation[]
             {
                 new Reservation{Guest_Id=1,Room_Id=1, StartDate=DateTime.Parse("2024-02-01"),EndDate=DateTime.Parse("2024-02-05"),TotalPrice=200,Owner = context.Users.FirstOrDefault()},

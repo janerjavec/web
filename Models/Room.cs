@@ -11,7 +11,7 @@ namespace web.Models
         public int NumberOfBeds { get; set; }
         public float Price { get; set; } // per night
         public string? Description { get; set; } // new/used , included breakfast...
-        public int HotelId { get; set; }
-        public Hotel Hotel { get; set; }
+        public int? HotelId { get; set; }
+        public Hotel? Hotel { get; set; }
     }
 }
