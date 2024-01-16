@@ -49,11 +49,21 @@ namespace web.Controllers
             return View(reservation);
         }
 
-        // GET: Reservation/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+// GET: Reservation/Create
+public IActionResult Create()
+{
+    // Ensure _context.Guest is not null and contains data
+    var guests = _context.Guest.Select(g => new SelectListItem { Value = g.Id.ToString(), Text = g.Name + " " + g.Surname }).ToList();
+    
+    // Add a default option
+    guests.Insert(0, new SelectListItem { Value = "", Text = "Select Guest" });
+
+    ViewBag.Guests = guests;
+    return View();
+}
+
+
+
 
         // POST: Reservation/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -68,6 +78,7 @@ namespace web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Guests = new SelectList(_context.Guest, "Id", "FullName");
             return View(reservation);
         }
 
