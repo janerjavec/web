@@ -23,6 +23,11 @@ namespace web.Data
             modelBuilder.Entity<Hotel>().ToTable("Hotel");
             modelBuilder.Entity<Reservation>().ToTable("Reservation");
             modelBuilder.Entity<Room>().ToTable("Room");
+            modelBuilder.Entity<Hotel>()
+                .HasMany(h => h.Rooms)
+                .WithOne(r => r.Hotel)
+                .HasForeignKey(r => r.HotelId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
