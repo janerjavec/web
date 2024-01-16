@@ -12,6 +12,6 @@ Zaslonske slike:
 <img width="1440" alt="Screenshot 2024-01-16 at 15 18 51" src="https://github.com/janerjavec/web/assets/54071636/15435fb8-17d5-400c-b602-d1418c58fa4b">
 
 
-
+Slika podatkovnega modela baze:
 ![image](https://github.com/janerjavec/web/assets/54071636/73315767-bf5b-48ee-8306-d42e1b922375)
 
