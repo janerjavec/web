@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using web.Data;
 using web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace web.Controllers
 {
@@ -32,6 +33,7 @@ namespace web.Controllers
         }
 
         // GET: Reservation/Details/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -50,6 +52,7 @@ namespace web.Controllers
         }
 
 // GET: Reservation/Create
+[Authorize]
 public IActionResult Create()
 {
     var guests = _context.Guest.Select(g => new SelectListItem
@@ -79,6 +82,7 @@ public IActionResult Create()
         // POST: Reservation/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Guest_Id,Room_Id,StartDate,EndDate,TotalPrice")] Reservation reservation)
@@ -94,6 +98,7 @@ public IActionResult Create()
         }
 
         // GET: Reservation/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -112,6 +117,7 @@ public IActionResult Create()
         // POST: Reservation/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Guest_Id,Room_Id,StartDate,EndDate,TotalPrice")] Reservation reservation)
@@ -145,6 +151,7 @@ public IActionResult Create()
         }
 
         // GET: Reservation/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -163,6 +170,7 @@ public IActionResult Create()
         }
 
         // POST: Reservation/Delete/5
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
