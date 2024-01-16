@@ -22,7 +22,12 @@ namespace web.Controllers
         // GET: Reservation
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Reservation.ToListAsync());
+            // Include the Room property when fetching reservations
+            var reservations = await _context.Reservation
+                .Include(r => r.Room)
+                .ToListAsync();
+
+            return View(reservations);
         }
 
         // GET: Reservation/Details/5
