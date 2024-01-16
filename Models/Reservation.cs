@@ -33,6 +33,7 @@ namespace web.Models
         public int Guest_Id { get; set; }
         //public Guest Guest { get; set; }  // Navigation property to the Guest entity
         public int Room_Id { get; set; }
+        public Room? Room { get; set; }
         [DataType(DataType.Date)]
         [FutureDate]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

@@ -28,6 +28,11 @@ namespace web.Data
                 .WithOne(r => r.Hotel)
                 .HasForeignKey(r => r.HotelId)
                 .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Room>()
+                .HasMany(r => r.Reservations)
+                .WithOne(res => res.Room)
+                .HasForeignKey(res => res.Room_Id)
+                .OnDelete(DeleteBehavior.Cascade); // Choose the appropriate delete behavior
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
