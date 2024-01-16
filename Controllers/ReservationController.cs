@@ -52,13 +52,24 @@ namespace web.Controllers
 // GET: Reservation/Create
 public IActionResult Create()
 {
-    // Ensure _context.Guest is not null and contains data
-    var guests = _context.Guest.Select(g => new SelectListItem { Value = g.Id.ToString(), Text = g.Name + " " + g.Surname }).ToList();
-    
-    // Add a default option
+    var guests = _context.Guest.Select(g => new SelectListItem
+    {
+        Value = g.Id.ToString(),
+        Text = $"{g.Name} {g.Surname}"
+    }).ToList();
+
     guests.Insert(0, new SelectListItem { Value = "", Text = "Select Guest" });
 
+    var rooms = _context.Room.Select(r => new SelectListItem
+    {
+        Value = r.Id.ToString(),
+        Text = $"{r.Description}"
+    }).ToList();
+
+    rooms.Insert(0, new SelectListItem { Value = "", Text = "Select Room" });
+
     ViewBag.Guests = guests;
+    ViewBag.Rooms = rooms;
     return View();
 }
 
