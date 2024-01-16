@@ -93,6 +93,36 @@
                 return Math.floor((utc2 - utc1) / _MS_PER_DAY);
             }
         });
+        $(document).ready(function () {
+            $('#StartDate').change(function () {
+                validateDate();
+            });
+
+            $('#EndDate').change(function () {
+                validateDate();
+            });
+
+            function validateDate() {
+                var startDate = new Date($('#StartDate').val());
+                var endDate = new Date($('#EndDate').val());
+                var today = new Date();
+
+                if (startDate < today) {
+                    alert('Start date must be today or in the future.');
+                    $('#StartDate').val('');
+                }
+
+                if (endDate < today) {
+                    alert('End date must be today or in the future.');
+                    $('#EndDate').val('');
+                }
+
+                if (endDate < startDate) {
+                    alert('End date must be equal to or later than the start date.');
+                    $('#EndDate').val('');
+                }
+            }
+        });
     </script>
 }
 

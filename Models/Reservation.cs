@@ -9,11 +9,12 @@ namespace web.Models
 
     public class FutureDateAttribute : ValidationAttribute
     {
+
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             if (!(value is DateTime))
             {
-                return new ValidationResult("Neveljaven datum.");
+                return new ValidationResult("Invalid date.");
             }
 
             DateTime submittedDate = (DateTime)value;
@@ -21,12 +22,14 @@ namespace web.Models
 
             if (submittedDate.Date < today)
             {
-                return new ValidationResult("Datum mora biti današnji ali v prihodnosti.");
+                return new ValidationResult("Date must be today or in the future.");
             }
 
             return ValidationResult.Success;
         }
     }
+
+
     public class Reservation
     {
         public int Id { get; set; }
