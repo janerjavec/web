@@ -56,9 +56,9 @@ namespace web.Data
 
             var rooms = new Room[]
             {
-                new Room { NumberOfBeds = 2, Price = 100.00f, Description = "Standard Room", HotelId = 1 },
-                new Room { NumberOfBeds = 1, Price = 80.00f, Description = "Single Room", HotelId = 1 },
-                new Room { NumberOfBeds = 3, Price = 120.00f, Description = "Suite", HotelId = 1 },
+                new Room { NumberOfBeds = 2, Price = 100, Description = "Standard Room", HotelId = 1 },
+                new Room { NumberOfBeds = 1, Price = 250, Description = "Single Room", HotelId = 1 },
+                new Room { NumberOfBeds = 3, Price = 500, Description = "Suite", HotelId = 1 },
                 // Add more rooms as needed
             };
 
@@ -66,84 +66,45 @@ namespace web.Data
             context.Room.AddRange(rooms);
             context.SaveChanges();
 
-                       /*
-            var reservation = new Reservation[]
+            var user = new ApplicationUser
             {
-                new Reservation{Guest_Id=1,Room_Id=1, StartDate=DateTime.Parse("2024-02-01"),EndDate=DateTime.Parse("2024-02-05"),TotalPrice=200,Owner = context.Users.FirstOrDefault()},
-                new Reservation{Guest_Id=2,Room_Id=1, StartDate=DateTime.Parse("2024-05-01"),EndDate=DateTime.Parse("2024-05-05"),TotalPrice=1200,Owner = context.Users.FirstOrDefault()}
+                FirstName = "Bob",
+                LastName = "Dilon",
+                City = "Ljubljana",
+                Email = "bob@example.com",
+                NormalizedEmail = "XXXX@EXAMPLE.COM",
+                UserName = "bob@example.com",
+                NormalizedUserName = "bob@example.com",
+                PhoneNumber = "+111111111111",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString("D")
             };
 
-            context.Reservation.AddRange(reservation);
-            context.SaveChanges();
-
-            var hotel = new Hotel[]
+            if (!context.Users.Any(u => u.UserName == user.UserName))
             {
-                new Hotel{Id=1,Name="Hotel Plaza",Location="Ljubljana", Rating=5}
-            };
+                var password = new PasswordHasher<ApplicationUser>();
+                var hashed = password.HashPassword(user, "Testni123!");
+                user.PasswordHash = hashed;
+                context.Users.Add(user);
+                context.SaveChanges(); // Save changes to get the user's Id
 
-            context.Hotel.AddRange(hotel);
-            context.SaveChanges();
+                // Retrieve the "Administrator" role from the database
+                var administratorRole = context.Roles.SingleOrDefault(r => r.Name == "Administrator");
 
+                if (administratorRole != null)
+                {
+                    // Assign the "Administrator" role to the user
+                    var userRole = new IdentityUserRole<string>
+                    {
+                        RoleId = administratorRole.Id,
+                        UserId = user.Id
+                    };
 
-            var room = new Room[]
-            {
-
-                new Room{Id=1,NumberOfBeds=4,Price=30, Description="included breakfast"}
-            };
-
-            context.Room.AddRange(room);
-            */
-/*
-            var roles = new IdentityRole[] {
-                new IdentityRole{Id="1", Name="Administrator"},
-                new IdentityRole{Id="2", Name="Manager"},
-                new IdentityRole{Id="3", Name="Staff"}
-            };
-
-            foreach (IdentityRole r in roles)
-            {
-                context.Roles.Add(r);
+                    context.UserRoles.Add(userRole);
+                    context.SaveChanges();
+                }
             }
-*/
-var user = new ApplicationUser
-{
-    FirstName = "Bob",
-    LastName = "Dilon",
-    City = "Ljubljana",
-    Email = "bob@example.com",
-    NormalizedEmail = "XXXX@EXAMPLE.COM",
-    UserName = "bob@example.com",
-    NormalizedUserName = "bob@example.com",
-    PhoneNumber = "+111111111111",
-    EmailConfirmed = true,
-    PhoneNumberConfirmed = true,
-    SecurityStamp = Guid.NewGuid().ToString("D")
-};
-
-if (!context.Users.Any(u => u.UserName == user.UserName))
-{
-    var password = new PasswordHasher<ApplicationUser>();
-    var hashed = password.HashPassword(user, "Testni123!");
-    user.PasswordHash = hashed;
-    context.Users.Add(user);
-    context.SaveChanges(); // Save changes to get the user's Id
-
-    // Retrieve the "Administrator" role from the database
-    var administratorRole = context.Roles.SingleOrDefault(r => r.Name == "Administrator");
-
-    if (administratorRole != null)
-    {
-        // Assign the "Administrator" role to the user
-        var userRole = new IdentityUserRole<string>
-        {
-            RoleId = administratorRole.Id,
-            UserId = user.Id
-        };
-
-        context.UserRoles.Add(userRole);
-        context.SaveChanges();
-    }
-}
 
 
             context.SaveChanges();
